@@ -6,7 +6,7 @@ use std::{
 };
 
 struct ByteNode {
-    is_last:     bool,
+    is_last: bool,
     next_letter: [Option<ByteNodeRef>; 256],
 }
 
@@ -19,7 +19,7 @@ type ByteNodeRef = Rc<RefCell<ByteNode>>;
 impl Default for ByteNode {
     fn default() -> Self {
         Self {
-            is_last:     false,
+            is_last: false,
             next_letter: std::array::from_fn(|_| None),
         }
     }
@@ -31,7 +31,7 @@ impl ByteNode {
             self.is_last = true;
         } else {
             let first = data[0] as usize;
-            let rest = &data[1 ..];
+            let rest = &data[1..];
             if self.next_letter[first].is_none() {
                 self.next_letter[first] = Some(Rc::new(RefCell::new(ByteNode::default())));
             }
@@ -48,7 +48,7 @@ impl ByteNode {
             self.is_last
         } else {
             let first = data[0] as usize;
-            let rest = &data[1 ..];
+            let rest = &data[1..];
             if self.next_letter[first].is_none() {
                 false
             } else {
@@ -76,5 +76,7 @@ impl ByteMatch {
         Ok(Self { root })
     }
 
-    pub fn contains(&self, value: &str) -> bool { self.root.contains(value.as_bytes()) }
+    pub fn contains(&self, value: &str) -> bool {
+        self.root.contains(value.as_bytes())
+    }
 }

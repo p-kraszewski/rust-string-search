@@ -6,8 +6,9 @@ use std::{
     rc::Rc,
 };
 
+#[derive(Default)]
 struct WordNode {
-    is_last:   bool,
+    is_last: bool,
     next_word: HashMap<String, WordRef>,
 }
 
@@ -17,22 +18,13 @@ pub struct WordMatch {
 
 type WordRef = Rc<RefCell<WordNode>>;
 
-impl Default for WordNode {
-    fn default() -> Self {
-        Self {
-            is_last:   false,
-            next_word: HashMap::new(),
-        }
-    }
-}
-
 impl WordNode {
     fn insert(&mut self, data: &[&str]) {
         if data.is_empty() {
             self.is_last = true;
         } else {
             let first = data[0];
-            let rest = &data[1 ..];
+            let rest = &data[1..];
             if !self.next_word.contains_key(first) {
                 self.next_word.insert(
                     first.to_string(),
@@ -48,7 +40,7 @@ impl WordNode {
             self.is_last
         } else {
             let first = data[0];
-            let rest = &data[1 ..];
+            let rest = &data[1..];
             if let Some(next) = self.next_word.get(first) {
                 next.borrow().contains(rest)
             } else {

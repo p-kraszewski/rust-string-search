@@ -1,5 +1,5 @@
 use std::io;
-use wordList::{byte_list, string_set, word_list};
+use word_list_test::{byte_list, string_set, word_list};
 
 // mod byte_list;
 // mod string_set;

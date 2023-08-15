@@ -1,9 +1,7 @@
 use std::{
-    cell::RefCell,
-    collections::{HashMap, HashSet},
+    collections::HashSet,
     fs::File,
     io::{BufRead, BufReader, Result},
-    rc::Rc,
 };
 
 pub struct SetMatch {
@@ -25,5 +23,7 @@ impl SetMatch {
         Ok(Self { root })
     }
 
-    pub fn contains(&self, value: &str) -> bool { self.root.contains(value) }
+    pub fn contains(&self, value: &str) -> bool {
+        self.root.contains(value)
+    }
 }
